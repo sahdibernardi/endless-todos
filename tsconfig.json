@@ -29,6 +29,6 @@
     "**/*.cjs",
     "**/*.mjs"
   ],
-  "types": ["node", "jest", "@testing-library/jest-dom"],
+  "types": ["node", "jest"],
   "exclude": ["node_modules"]
 }

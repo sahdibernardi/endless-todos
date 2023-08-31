@@ -1,3 +1,4 @@
+import { get } from 'http';
 import React, { useState, useEffect } from 'react';
 import { type Task } from '~/interfaces/Task';
 
@@ -5,17 +6,18 @@ const TodoList: React.FC = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [newTask, setNewTask] = useState<string>('');
 
-  useEffect(() => {
+  const getTasks = () => {
     const storedTasksString: string | null = localStorage.getItem('tasks');
     if (storedTasksString !== null) {
       const storedTasks: Task[] = JSON.parse(storedTasksString) as Task[];
       setTasks(storedTasks);
     }
-  }, []);
+  }
 
   useEffect(() => {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-  }, [tasks]);
+    getTasks();
+  }, []);
+
 
   const handleInputChange = (index: number, value: string): void => {
     const updatedTasks: Task[] = [...tasks];
@@ -28,6 +30,7 @@ const TodoList: React.FC = () => {
       };
   
       setTasks(updatedTasks);
+      localStorage.setItem('tasks', JSON.stringify(updatedTasks));
     }
   };
 
@@ -42,14 +45,14 @@ const TodoList: React.FC = () => {
       };
     }
     
-    // Sort the tasks by createdAt field
     updatedTasks.sort((a, b) => {
       if (a.done && !b.done) return 1;
       if (!a.done && b.done) return -1;
-      return a.createdAt.getTime() - b.createdAt.getTime();
+      return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
     });
     
     setTasks(updatedTasks);
+    localStorage.setItem('tasks', JSON.stringify(updatedTasks));
   };
 
   const handleAddTask = (e: React.FormEvent): void => {
@@ -57,6 +60,7 @@ const TodoList: React.FC = () => {
     if (newTask.trim() !== '') {
       const formattedTask = newTask.charAt(0).toUpperCase() + newTask.slice(1);
       setTasks([...tasks, { task: formattedTask, done: false, createdAt: new Date() }]);
+      localStorage.setItem('tasks', JSON.stringify(tasks));
       setNewTask('');
     }
   };

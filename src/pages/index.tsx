@@ -4,7 +4,6 @@ import TodoList from "~/components/ToDoList";
 // import { api } from "~/utils/api";
 
 export default function Home() {
-  // const hello = api.example.hello.useQuery({ text: "from tRPC" });
 
   useEffect(() => {
     document.body.className = "bg-charcoal-700";
