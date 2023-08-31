@@ -1,26 +1,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-.task-list {
-  list-style-type: none;
-  padding: 0;
-}
-
-.task-done {
-  opacity: 0.6;
-  color: none;
-  /* transform: translateY(1px); */
-  margin-bottom: 2px;
-  text-decoration: line-through;
-  transition: opacity 0.3s, transform 0.3s;
-}
-
-.task-undone {
-  /* transform: translateY(0px); */
-  transition: transform 0.3s;
-}
-
-.test {
-  border: 2px solid red;
-}

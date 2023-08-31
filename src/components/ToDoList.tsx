@@ -55,24 +55,23 @@ const TodoList: React.FC = () => {
   const handleAddTask = (e: React.FormEvent): void => {
     e.preventDefault();
     if (newTask.trim() !== '') {
-      setTasks([...tasks, { task: newTask, done: false, createdAt: new Date() }]);
+      const formattedTask = newTask.charAt(0).toUpperCase() + newTask.slice(1);
+      setTasks([...tasks, { task: formattedTask, done: false, createdAt: new Date() }]);
       setNewTask('');
     }
   };
 
   return (
-    <div>
-      <h1>Todo List</h1>
-      <div>
-        <form onSubmit={handleAddTask}>
+    <div className='w-80'>
+        <form onSubmit={handleAddTask} className='my-4'>
           <input
             type="text"
-            placeholder="Enter a new task"
+            placeholder="Add todo item"
             value={newTask}
             onChange={(e) => setNewTask(e.target.value)}
+            className='bg-transparent p-2 border-b border-charcoal-600 w-full text-white'
           />
         </form>
-      </div>
       <ul className="task-list">
         {tasks.map((task, index) => (
           <li key={index} className={task.done ? 'line-through flex row items-center' : 'flex row items-center'}>
