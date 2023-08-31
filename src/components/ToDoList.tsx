@@ -52,7 +52,8 @@ const TodoList: React.FC = () => {
     setTasks(updatedTasks);
   };
 
-  const handleAddTask = (): void => {
+  const handleAddTask = (e: React.FormEvent): void => {
+    e.preventDefault();
     if (newTask.trim() !== '') {
       setTasks([...tasks, { task: newTask, done: false, createdAt: new Date() }]);
       setNewTask('');
@@ -63,13 +64,14 @@ const TodoList: React.FC = () => {
     <div>
       <h1>Todo List</h1>
       <div>
-        <input
-          type="text"
-          placeholder="Enter a new task"
-          value={newTask}
-          onChange={(e) => setNewTask(e.target.value)}
-        />
-        <button onClick={handleAddTask}>Add Task</button>
+        <form onSubmit={handleAddTask}>
+          <input
+            type="text"
+            placeholder="Enter a new task"
+            value={newTask}
+            onChange={(e) => setNewTask(e.target.value)}
+          />
+        </form>
       </div>
       <ul className="task-list">
         {tasks.map((task, index) => (
