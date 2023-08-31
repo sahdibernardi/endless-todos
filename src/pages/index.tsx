@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { useEffect } from "react";
+import TodoList from "~/components/ToDoList";
 // import { api } from "~/utils/api";
 
 export default function Home() {
@@ -23,7 +24,8 @@ export default function Home() {
           </h1>
         </div>
         <main className="mx-auto max-w-md justify-center pt-32 text-white">
-          ✨ Start here ✨
+          <TodoList />
+          {/* ✨ Start here ✨ */}
           {/* <p className="text-2xl text-white">
             {hello.data ? hello.data.greeting : "Loading tRPC query..."}
           </p> */}
