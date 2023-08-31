@@ -25,10 +25,6 @@ export default function Home() {
         </div>
         <main className="mx-auto max-w-md justify-center pt-32 text-white">
           <TodoList />
-          {/* ✨ Start here ✨ */}
-          {/* <p className="text-2xl text-white">
-            {hello.data ? hello.data.greeting : "Loading tRPC query..."}
-          </p> */}
         </main>
       </div>
     </>

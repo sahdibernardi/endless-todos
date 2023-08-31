@@ -75,18 +75,19 @@ const TodoList: React.FC = () => {
       </div>
       <ul className="task-list">
         {tasks.map((task, index) => (
-          <li key={index} className={task.done ? 'task-done' : 'task-undone'}>
-            <input
-              type="checkbox"
-              checked={task.done}
-              onChange={() => handleCheckboxChange(index)}
-            />
-            <input
-              type="text"
-              value={task.task}
-              onChange={(e) => handleInputChange(index, e.target.value)}
-              readOnly={task.done}
-            />
+          <li key={index} className={task.done ? 'line-through flex row items-center' : 'flex row items-center'}>
+            <div
+              onClick={() => handleCheckboxChange(index)}
+              className={`w-6 h-6 bg-charcoal-600 rounded-full flex items-center justify-center cursor-pointer ${task.done ? 'charcoal-800' : 'charcoal-600'}`}
+            >
+              {task.done && <div className="w-4 h-4 bg-charcoal-800 rounded-full"></div>}
+            </div>
+            <div
+              contentEditable={!task.done}
+              onBlur={(e) => handleInputChange(index, e.currentTarget.innerHTML)}
+              className={`bg-transparent p-2`}
+              dangerouslySetInnerHTML={{ __html: task.task }}
+            ></div>
           </li>
         ))}
       </ul>
